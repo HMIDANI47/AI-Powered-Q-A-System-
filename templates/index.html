@@ -1,1 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-powered Q&A system</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .navbar {
+            background-color: #007bff;
+        }
+        .navbar-brand {
+            color: white !important;
+            font-weight: bold;
+        }
+        .chat-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .response-box {
+            background: #f1f3f4;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">AI-powered Q&A system</a>
+        </div>
+    </nav>
 
+    <div class="container chat-container">
+        <h2 class="text-center mb-4">Chat with the Bot</h2>
+
+        <div class="mb-4">
+            <form id="upload-form" class="mb-3">
+                <div class="mb-3">
+                    <label for="file-upload" class="form-label">Upload Documents (PDF or TXT)</label>
+                    <input class="form-control" type="file" name="files" id="file-upload" multiple>
+                </div>
+                <button type="submit" class="btn btn-primary">Upload</button>
+            </form>
+        </div>
+
+        <div class="mb-4">
+            <form id="ask-form">
+                <div class="input-group mb-3">
+                    <input type="text" name="query" class="form-control" placeholder="Ask a question...">
+                    <button type="submit" class="btn btn-success">Ask</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="text-center mb-4">
+            <button id="reset-button" class="btn btn-warning">Reset Conversation</button>
+        </div>
+
+        <div id="response" class="response-box">
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+    <script>
+        document.getElementById("upload-form").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const response = await fetch("/upload", {
+                method: "POST",
+                body: formData,
+            });
+            const result = await response.json();
+            alert(result.message);
+        });
+
+        document.getElementById("ask-form").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const query = e.target.query.value;
+            const response = await fetch("/ask", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ query }),
+            });
+            const result = await response.json();
+
+            // Display only the answer
+            const responseBox = document.getElementById("response");
+            responseBox.innerHTML = `<p><strong>Answer:</strong> ${result.answer}</p>`;
+        });
+
+        document.getElementById("reset-button").addEventListener("click", async () => {
+            const response = await fetch("/reset", { method: "POST" });
+            const result = await response.json();
+            alert(result.message);
+
+            document.getElementById("response").innerHTML = "";
+        });
+    </script>
+</body>
+</html>
