@@ -87,3 +87,5 @@ faiss-cpu==1.7.4
 numpy==1.24.3
 
 torch==2.1.0
+
+https://github.com/user-attachments/assets/ec26e980-c922-450f-a354-9f210e1c52c5
