@@ -1,4 +1,6 @@
 # AI-Powered-Q-A-System - with RAG
+![image](https://github.com/user-attachments/assets/58071d2c-4212-4e3a-8575-880390b470a2)
+
 This project is a Retrieval-Augmented Generation (RAG) Chatbot that answers user questions based on a set of documents.
 It uses Hugging Face models for text generation and FAISS for vector-based document retrieval.
 The chatbot is built using Python and Flask, with a simple web interface for interact
