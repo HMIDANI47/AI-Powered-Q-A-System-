@@ -71,10 +71,17 @@ cd rag-chatbot
 **requirements  :** 
 
 Flask==3.0.0
+
 nltk==3.8.1
+
 PyPDF2==3.0.1
+
 transformers==4.35.0
+
 sentence-transformers==2.2.2
+
 faiss-cpu==1.7.4
+
 numpy==1.24.3
+
 torch==2.1.0
