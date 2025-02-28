@@ -51,8 +51,8 @@ You can customize the system by changing:
 
 1. Clone the Repository:
 ```
-git clone https://github.com/your-username/rag-chatbot.git
-cd rag-chatbot
+git clone https://github.com/HMIDANI47/AI-Powered-Q-A-System-.git
+cd AI-Powered-Q-A-System-.git
 ```
 
 3. Create a Virtual Environment : `python -m venv myenv `
